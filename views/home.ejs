@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>home</title>
+</head>
+
+<body>
+    <%- include('./partials/navbar') %>
+        <% if (locals.user) { %>
+            <div class=" mt-3 d-flex justify-content-center align-items-center gap-4">
+                <img src="<%= locals.user.profileImage %>" class="rounded-5" style="width: 100px;" />
+                <h5 class="text-center">
+                    <%= locals.user.name %>
+                </h5>
+            </div>
+            <div class="container">
+                <h3>blogs</h3>
+                <div class="container mt-3 d-flex g-3 justify-content-around flex-wrap">
+                    <% blogs.forEach(blog=> { %>
+                        <div class="col p-4">
+                            <div class="card col" style="width:18rem">
+                                <img src="<%= blog.coverImage %>" height="300px" width="200px" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <%= blog.title %>
+                                    </h5>
+                                    <a href="<%=blog._id %>" class="btn btn-primary">read</a>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+
+            <% } else { %>
+                <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+                    <h1>welcome to blogify application</h1>
+                </div>
+                
+                <% } %>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>

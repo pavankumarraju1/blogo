@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>home</title>
+
+</head>
+
+<body>
+    <%- include('./partials/navbar') %>
+        <div class="container mt-3">
+            <h1>
+                <%= blogs.title %>
+            </h1>
+            <img src="<%= blogs.coverImage %>" height="500px" width="400px" class="rounded">
+            <p>
+                <%= blogs.content %>
+            </p>
+        </div>
+
+        <div class="container mt-5 d-flex gap-3">
+            <img src="<%= blogs.createdBy.profileImage %>" alt="blog owner" class="rounded-circle" width="50px" />
+            <h2>
+                <%= blogs.createdBy.username %>
+            </h2>
+        </div>
+
+        <div>
+            <% if (locals.user) { %>
+                <div class="container mt-3 mb-3">
+                    <h2>Comments (<%= comment.length %>)</h2>
+                    <form action="/comment/<%= blogs._id %>" method="post">
+                        <div class="mb-3">
+                            <input type="tecxt" class="form-control" name="content" placeholder="enter your comment">
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-primary" type="submit">add</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="container mt-5">
+                    <% comment.forEach(val=> { %>
+                        <div class="container mt-3 d-flex gap-5">
+                            <div>
+                                <img src="<%= val.createdBy.profileImage %>" alt="blog owner" class="rounded-circle" width="50px" />
+                                <p><%= val.createdBy.username %></p>
+                            </div>
+                            <pre><%= val.content %></pre>
+                        </div>
+
+                        <% }) %>
+                </div>
+                <% } %>
+
+        </div>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>
