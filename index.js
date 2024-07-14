@@ -11,10 +11,12 @@ import commentRouter from './routes/commentRouter.js';
 import connection from './connection.js'; 
 import checkAuthCookie from './middlewares/authenticatication.js';
  
+const PORT = process.env.PORT || 8000
+
+const app = express();   
+
 connection(process.env.db_url).catch((err) => console.log(err))
   
-const app = express();   
-const PORT = process.env.PORT || 8000
  
 app.set("view engine","ejs");
 app.set("views",path.resolve("./views"));
