@@ -31,6 +31,6 @@ app.use("/blog",blogRouter)
 app.use("/comment",commentRouter)
  
 
-app.listen(process.env.port,()=>{ 
+app.listen(process.env.PORT,()=>{ 
     console.log(`server started ${PORT}`)
 })   
