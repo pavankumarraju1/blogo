@@ -28,6 +28,7 @@ userRouter.post("/signup", upload.single('profileImage'), async (req, res) => {
     try { 
         const existUser = await userModel.findOne({ email }); 
         //console.log(existUser)
+        console.log(req.file)
         if (existUser) {
             res.render('signup', {
                 signupMsg: "email already exixts!! try again"
