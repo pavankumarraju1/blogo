@@ -2,21 +2,28 @@ import 'dotenv/config'
 import express from "express"
 import path from "path"
 import cookieParser from 'cookie-parser';
+import mongoose from 'mongoose';
 
 import ejsRouter from './routes/ejsRoutes.js';
 import userRouter from './routes/user.js';
 import blogRouter from './routes/blogRoutes.js';
 import commentRouter from './routes/commentRouter.js';
 
-import connection from './connection.js'; 
+//import connection from './connection.js'; 
 import checkAuthCookie from './middlewares/authenticatication.js';
  
 const PORT = process.env.PORT || 8000
 
-const app = express();   
 
-connection(process.env.db_url).catch((err) => console.log(err))
-  
+//connection(process.env.db_url).catch((err) => console.log(err))
+const connection = async () => {
+    await mongoose.connect(process.env.db_url);
+    console.log("db connected");
+}
+
+connection().catch(err=>console.log(err));
+
+const app = express();   
  
 app.set("view engine","ejs");
 app.set("views",path.resolve("./views"));
