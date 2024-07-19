@@ -16,12 +16,12 @@ const PORT = process.env.PORT || 8000
 
 
 //connection(process.env.db_url).catch((err) => console.log(err))
-const connection = async () => {
+async function connection(){
     await mongoose.connect(process.env.db_url);
     console.log("db connected");
 }
 
-connection().catch(err=>console.log(err));
+connection().then((res)=>console.log(res)).catch(err=>console.log(err));
 
 const app = express();   
  
